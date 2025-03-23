@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>타임리프 샘플 페이지</title>
+	<meta charset="UTF-8">
+</head>	
+<body>
+
+	<!--타임리프로 서버에서 보낸 단일값 텍스트로 표시하기-->
+	<!--태그의 속성으로써 값을 가져오고 해당 태그의 text를 전부 대체함-->
+	<h1 th:text="${message}"></h1>
+	
+	<!-- 인라인 방식으로 태그 사이에 text 영역에 직접 표현함(받아온 데이터에 앞뒤로 문자열을 붙일때 주로 쓰임)-->
+	<div th:inline="text"> [[${message}]] </div>
+	
+	
+	<!-- 객체 받아오기 key.변수명 으로 받아옴-->
+	<div th:text="${obj.name}"></div>
+	<div th:inline="text">현재시세: [[${obj.price}]]  원</div>
+
+	
+	<!--List 받아서 반복문 사용-->
+	<table style="border: 1px solid red;" >
+	<tr th:each="product : ${productList}">
+	  <td th:text="${product.name}"></td>
+	  <td th:text="${product.price}"></td>
+	</tr>
+	</table>
+	
+	
+	
+	<!-- 1~5 반복 및 여러 편의변수 -->
+	<!--th:block 태그는 html태그는 필요없는데 타임리프의 기능만 필요할때 사용하는 가짜태그라고 보면됨-->
+	<!--의미없는가짜 태그를 통해 타임리프를 쓰는 이유는 타임리프가 html 형태를 지향하기때문-->
+	<th:block th:each="num : ${#numbers.sequence(1,5)}">
+		<div th:text="${num}"></div>
+		<p th:text="${numStat.index}"></p>
+		<p th:text="${numStat.size}"></p>
+		짝수인지
+		<p th:text="${numStat.even}"></p>
+		홀수인지
+		<p th:text="${numStat.odd}"></p>
+	</th:block>
+	
+	
+	
+	<!-- if문 예시-->
+	<!--user 라는 키로 보내주는값이 없음-->
+	<!-- 타임리프에는 else가 없음-->
+	<div th:if="${user != null}">
+	    유저가 존재합니다.
+	</div>
+	<div th:if="${user == null}">
+	    유저가 존재하지 않습니다.
+	</div>
+	
+	
+	
+</body>
+</html>
