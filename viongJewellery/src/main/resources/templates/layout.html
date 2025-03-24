@@ -1,0 +1,25 @@
+<!-- templates/layout.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">비옹보석 </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header class="border">
+        <nav>
+            <a th:href="@{/}">home</a> |
+        </nav>
+    </header>
+
+    <main layout:fragment="content">
+        <!-- 자식 페이지에서 여기에 내용 채움 -->
+    </main>
+
+    <footer>
+        <p>&copy; 2025 비옹보석 Inc. All rights reserved.</p>
+    </footer>
+</body>
+</html>

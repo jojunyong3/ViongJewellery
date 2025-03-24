@@ -12,7 +12,7 @@ public class ViongJewelleryController {
 	public String indexView(Model model) {
 		model.addAttribute("message", "Hello, ViongJewellery");
 	
-		return "viongJewellery";
+		return "index";
 	}
 	
 	

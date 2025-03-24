@@ -12,13 +12,11 @@
 	
 	<!-- 인라인 방식으로 태그 사이에 text 영역에 직접 표현함(받아온 데이터에 앞뒤로 문자열을 붙일때 주로 쓰임)-->
 	<div th:inline="text"> [[${message}]] </div>
-	
-	
+
 	<!-- 객체 받아오기 key.변수명 으로 받아옴-->
 	<div th:text="${obj.name}"></div>
 	<div th:inline="text">현재시세: [[${obj.price}]]  원</div>
 
-	
 	<!--List 받아서 반복문 사용-->
 	<table style="border: 1px solid red;" >
 	<tr th:each="product : ${productList}">
@@ -26,8 +24,6 @@
 	  <td th:text="${product.price}"></td>
 	</tr>
 	</table>
-	
-	
 	
 	<!-- 1~5 반복 및 여러 편의변수 -->
 	<!--th:block 태그는 html태그는 필요없는데 타임리프의 기능만 필요할때 사용하는 가짜태그라고 보면됨-->

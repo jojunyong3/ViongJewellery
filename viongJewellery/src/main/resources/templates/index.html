@@ -1,13 +1,15 @@
+<!-- templates/pages/home.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-	<title>비옹보석</title>
-	<meta charset="UTF-8">
-</head>	
+    <title layout:title="홈">홈</title>
+</head>
 <body>
-	<h1>비옹보석</h1>
-	<p>메인페이지 입니다.</p>
-	
-
+<div layout:fragment="content">
+    <h2>홈 페이지입니다</h2>
+    <p>이 페이지는 레이아웃을 상속받고 본문만 채웁니다.</p>
+</div>
 </body>
 </html>

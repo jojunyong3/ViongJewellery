@@ -1,0 +1,4 @@
+content: [
+    './resources/templates/**/*.html'
+  ]
+  
