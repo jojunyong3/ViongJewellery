@@ -10,6 +10,7 @@ public class ViongJewelleryApplication {
 	public static void main(String[] args) {
 		
 		SpringApplication.run(ViongJewelleryApplication.class, args);
+		System.out.println("강사에서 수정");
 	}
 
 }
