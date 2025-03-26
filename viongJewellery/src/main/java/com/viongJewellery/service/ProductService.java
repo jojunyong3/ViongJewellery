@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.viongJewellery.DAO.ProductDAO;
+import com.viongJewellery.dao.ProductDAO;
+import com.viongJewellery.entity.ProductEntity;
 
 
 
@@ -16,17 +17,14 @@ public class ProductService {
 	ProductDAO dao;
 	
 	
-	public String test()
+	public List<ProductEntity> test(String name)
 	{
+		//현재는 데이터 가공하는것 없이 그대로 컨트롤러로 전달
+		List<ProductEntity> list = dao.selectList(name);
 		
-		List<String> list = dao.selectList("");
 		
-		
-		return "";
-		//어떤 DAO 쓸까?
-		//DAO이용해 데이터 가져온다.
-		// 가져온 데이터를 가공한다.
-		//가공된 데이터를 컨트롤러에 돌려준다.
+		return list;
+
 	}
 
 }

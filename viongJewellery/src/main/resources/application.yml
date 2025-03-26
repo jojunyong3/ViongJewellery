@@ -4,6 +4,10 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://3.34.204.116.cni2e8ysa9dk.ap-northeast-2.rds.amazonaws.com:3306/viongJewellery
+    url: jdbc:mysql://3.34.204.116:3306/viongJewellery
     username: viongJewellery
     password: viongJewellery
+
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+  type-aliases-package: com.viongJewellery.entity
