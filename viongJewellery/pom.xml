@@ -80,6 +80,11 @@
 	        <artifactId>mysql-connector-java</artifactId>
 	        <version>8.0.33</version>
 	    </dependency>
+	    <dependency><!--2025.03.28 마이바티스 페이징처리-->
+		    <groupId>com.github.pagehelper</groupId>
+		    <artifactId>pagehelper-spring-boot-starter</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -18,9 +18,9 @@ public class ViongJewelleryController {
 	
 	
 	@GetMapping("/")
-	public String indexView(Model model) {
+	public String MainView(Model model) {
 		
-		List<ProductEntity> list = service.test(null);
+		List<ProductEntity> list = service.getList(null);
 		
 		model.addAttribute("productList", list);
 		

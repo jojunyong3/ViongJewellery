@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>ajax 예제</title>
+	<meta charset="UTF-8">
+</head>	
+<body>
+	<h1>AJAX 예제</h1>
+	<button id="loadBtn">메시지 가져오기</button>
+	<p id="result">여기에 결과가 표시됩니다.</p>
+  
+	<script>
+	  document.getElementById("loadBtn").addEventListener("click", () => {
+		fetch("/api/v1/public/ajaxtest")
+		  .then(response => response.json())
+		  .then(data => {
+			document.getElementById("result").innerText = JSON.stringify(data, null, 2); // 예쁘게 포맷
+		  })
+		  .catch(err => {
+			console.error("에러 발생:", err);
+		  });
+	  });
+	</script>
+	
+	
+</body>
+</html>

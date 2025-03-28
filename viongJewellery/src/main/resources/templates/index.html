@@ -12,13 +12,38 @@
     <p>이 페이지는 레이아웃을 상속받고 본문만 채웁니다.</p>
 
 	
+
+	<div class="grid grid-cols-3 lg:grid-cols-5 gap-5 mx-3">
+		<div th:each="product : ${productList}">
+				<div class="border-2 ">
+					<p th:text="${product.SEQ}"></p>
+					<p th:text="${product.NAME}"></p>
+					<p th:text="${product.HAND_EXPENSES}"></p>
+					<p th:text="${product.WEIGHT}"></p>
+					<p th:text="${product.SIZE}"></p>
+					<p th:text="${product.STOCK}"></p>
+					<p th:text="${product.CONTENT}"></p>
+					<p th:text="${product.IMAGE}"></p>
+					<p th:text="${product.STATUS_CODE}"></p>
+					<p th:text="${product.CATEGORY_CODE}"></p>
+				</div>
+		</div>
+	</div>
+
+
+    관리자
+	
+
+
+
+</div>
 	<!--List 받아서 반복문 사용-->
-	<table style="border: 1px solid red;" >
+	<!-- <table style="border: 1px solid red;" >
 	<tr th:each="product : ${productList}">
 	  <td th:text="${product.PRODUCT_NAME}"></td>
 	  <td th:text="${product.PRODUCT_PRICE}"></td>
 	</tr>
-	</table>
+	</table> -->
 	
 	
 

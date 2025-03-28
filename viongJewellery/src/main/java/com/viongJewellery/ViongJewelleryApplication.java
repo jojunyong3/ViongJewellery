@@ -1,6 +1,6 @@
 package com.viongJewellery;
 
-import com.viongJewellery.controller.TestController;
+import com.viongJewellery.controller.TestViewController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;

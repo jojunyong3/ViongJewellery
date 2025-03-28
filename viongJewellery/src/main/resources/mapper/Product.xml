@@ -5,17 +5,84 @@
 
 <mapper namespace="com.viongJewellery.dao.ProductDAO">
 
+  <!-- 목록 조회 -->
   <select id="selectList" resultType="com.viongJewellery.entity.ProductEntity">
-    SELECT PRODUCT_NUMBER,
-           PRODUCT_NAME,
-           PRODUCT_PRICE,
-           PRODUCT_STCOK,
-           PRODUCT_CONTENT,
-           PRODUCT_IMAGE,
-           PRODUCT_STATUS
+    SELECT SEQ,
+           NAME,
+           HAND_EXPENSES,
+           WEIGHT,
+           SIZE,
+           STOCK,
+           CONTENT,
+           IMAGE,
+           STATUS_CODE,
+           CATEGORY_CODE
     FROM PRODUCT
-    WHERE 1=1
-      AND (#{name} IS NULL OR PRODUCT_NAME = #{name})
+    <where>
+      <if test="name != null and name != ''"> AND NAME = #{name} </if>
+    </where>
   </select>
+
+  <!-- 단건 조회 -->
+  <select id="selectOne" resultType="com.viongJewellery.entity.ProductEntity" parameterType="long">
+    SELECT SEQ,
+           NAME,
+           HAND_EXPENSES,
+           WEIGHT,
+           SIZE,
+           STOCK,
+           CONTENT,
+           IMAGE,
+           STATUS_CODE,
+           CATEGORY_CODE
+    FROM PRODUCT
+    WHERE SEQ = #{seq}
+  </select>
+
+  <!-- 등록 -->
+  <insert id="insert" parameterType="com.viongJewellery.entity.ProductEntity">
+    INSERT INTO PRODUCT (
+      NAME,
+      HAND_EXPENSES,
+      WEIGHT,
+      SIZE,
+      STOCK,
+      CONTENT,
+      IMAGE,
+      STATUS_CODE,
+      CATEGORY_CODE
+    ) VALUES (
+      #{name},
+      #{handExpenses},
+      #{weight},
+      #{size},
+      #{stock},
+      #{content},
+      #{image},
+      #{statusCode},
+      #{categoryCode}
+    )
+  </insert>
+
+  <!-- 수정 -->
+  <update id="update" parameterType="com.viongJewellery.entity.ProductEntity">
+    UPDATE PRODUCT
+    SET NAME = #{name},
+        HAND_EXPENSES = #{handExpenses},
+        WEIGHT = #{weight},
+        SIZE = #{size},
+        STOCK = #{stock},
+        CONTENT = #{content},
+        IMAGE = #{image},
+        STATUS_CODE = #{statusCode},
+        CATEGORY_CODE = #{categoryCode}
+    WHERE SEQ = #{seq}
+  </update>
+
+  <!-- 삭제 -->
+  <delete id="delete" parameterType="long">
+    DELETE FROM PRODUCT
+    WHERE SEQ = #{seq}
+  </delete>
 
 </mapper>

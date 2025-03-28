@@ -11,12 +11,14 @@ import lombok.Data;
 @Data
 public class ProductEntity {
 	
-    private String PRODUCT_NUMBER;
-    private String PRODUCT_NAME;
-    private int    PRODUCT_PRICE;
-    private int    PRODUCT_STCOK;
-    private String PRODUCT_CONTENT;
-    private String PRODUCT_IMAGE;
-    private String PRODUCT_STATUS;
-
+    private int    SEQ;
+    private String NAME;
+    private int    HAND_EXPENSES;
+    private int    WEIGHT;
+    private int    SIZE;
+    private int    STOCK;
+    private String CONTENT;
+    private String IMAGE;
+    private String STATUS_CODE;
+    private String CATEGORY_CODE;
 }

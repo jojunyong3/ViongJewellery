@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.viongJewellery.dao.UserDAO">
+
+  <!-- 단건 조회 -->
+  <select id="select" resultType="com.viongJewellery.entity.UserEntity" >
+    SELECT ID,
+           NAME,
+           PASSWORD,
+           EMAIL,
+           GRADE         
+    FROM ADMIN
+    WHERE ID = #{name}
+  </select>
+
+ 
+
+</mapper>

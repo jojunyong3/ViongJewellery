@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>페이징 처리 예제 (fetch)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6 bg-gray-50 dark:bg-neutral-900">
+  <h1 class="text-xl font-semibold mb-4 text-gray-800 dark:text-neutral-200">상품 리스트</h1>
+
+  <div class="mb-4 flex gap-2">
+    <input type="text" id="searchName" placeholder="상품명 검색" class="px-4 py-2 border rounded-lg w-full max-w-sm dark:bg-neutral-800 dark:border-neutral-600 dark:text-neutral-200" />
+    <button onclick="loadPage(1)" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">검색</button>
+  </div>
+
+  <div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="overflow-hidden">
+          <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+            <thead>
+              <tr>
+                <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">ID</th>
+                <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">상품명</th>
+                <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">가격</th>
+              </tr>
+            </thead>
+            <tbody id="productTableBody" class="divide-y divide-gray-200 dark:divide-neutral-700">
+              <!-- JS로 동적 채움 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pagination" class="mt-4 flex justify-center gap-1">
+    <!-- JS로 페이지 버튼 생성 -->
+  </div>
+
+  <script>
+    async function loadPage(pageNum = 1) {
+      const name = document.getElementById('searchName').value;
+      const size = 10;
+
+      const res = await fetch(`/api/v1/public/product/page?name=${encodeURIComponent(name)}&page=${pageNum}&size=${size}`);
+      const data = await res.json();
+    
+
+      const tableBody = document.getElementById('productTableBody');
+      tableBody.innerHTML = '';
+      data.list.forEach(product => {
+        const row = `<tr>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">${product.product_NUMBER}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${product.product_NAME}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${product.product_PRICE}</td>
+        </tr>`;
+        tableBody.insertAdjacentHTML('beforeend', row);
+      });
+
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+
+      if (data.pageNum > 1) {
+        pagination.insertAdjacentHTML('beforeend',
+          `<button onclick="loadPage(${data.pageNum - 1})" class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 dark:bg-neutral-700 dark:hover:bg-neutral-600">이전</button>`);
+      }
+
+      for (let i = 1; i <= data.pages; i++) {
+        pagination.insertAdjacentHTML('beforeend',
+          `<button onclick="loadPage(${i})" class="px-3 py-1 rounded ${i === data.pageNum ? 'bg-blue-600 text-white' : 'bg-gray-200 hover:bg-gray-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-200'}">${i}</button>`);
+      }
+
+      if (data.pageNum < data.pages) {
+        pagination.insertAdjacentHTML('beforeend',
+          `<button onclick="loadPage(${data.pageNum + 1})" class="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 dark:bg-neutral-700 dark:hover:bg-neutral-600">다음</button>`);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadPage(1);
+    });
+  </script>
+</body>
+</html>
