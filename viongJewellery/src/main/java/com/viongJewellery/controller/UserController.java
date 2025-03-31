@@ -18,7 +18,7 @@ public class UserController {
 	@GetMapping("/api/user")
 	public User User( ) {
 		
-		User user = userService.getUser();
+		User user = userService.getUser("admin01");
 
 		return user;
 	}

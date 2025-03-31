@@ -16,9 +16,9 @@ public class UserService {
 	@Autowired
 	UserDAO dao;
 	
-	public User getUser()
+	public User getUser(String name)
 	{
-		UserEntity entity = dao.select("admin01");
+		UserEntity entity = dao.select(name);
 		
 		User user = new User(entity);
 		

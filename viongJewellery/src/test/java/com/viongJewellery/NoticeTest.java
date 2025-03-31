@@ -1,32 +1,33 @@
 package com.viongJewellery;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.viongJewellery.dao.UserDAO;
 import com.viongJewellery.dto.User;
+import com.viongJewellery.entity.NoticeEntity;
+import com.viongJewellery.service.NoticeService;
 import com.viongJewellery.service.UserService;
 
 @SpringBootTest
-public class UserTest {
+public class NoticeTest {
 
-	@Autowired
-	UserService service;
-	
 	
 	@Autowired
-	UserDAO dao;
+	NoticeService service;
 	
+
 	
 	@Test
-	void userSelectOne() {
+	void noticeTest() {
 		
-		User user = service.getUser("");
+		List<NoticeEntity> list = service.getNotice();
 		
 		
-		//UserEntity entity = dao.select();
-		//System.out.println(user);
+		System.out.println(list.size());
 		
 		
 	}

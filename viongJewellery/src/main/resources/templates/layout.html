@@ -5,14 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">비옹보석 </title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+    <link rel="stylesheet" href="https://preline.co/assets/css/main.min.css">
 </head>
 <body>
-    <header class="border">
-        <nav>
-            <a th:href="@{/}">home</a> |
+    <header class="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm py-3 dark:bg-neutral-800">
+        <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
+          <a class="flex-none font-semibold text-xl text-black focus:outline-hidden focus:opacity-80 dark:text-white" href="#" aria-label="Brand">비옹</a>
+          <div class="flex flex-row items-center gap-5 mt-5 sm:justify-end sm:mt-0 sm:ps-5">
+            <a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-hidden focus:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500 dark:focus:text-neutral-500" href="#">소개</a>
+            <a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-hidden focus:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500 dark:focus:text-neutral-500" href="#">제품</a>
+            <a class="font-medium text-gray-600 hover:text-gray-400 focus:outline-hidden focus:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500 dark:focus:text-neutral-500" href="/v1/public/view/notice">공지사항</a>
+          </div>
         </nav>
-    </header>
+      </header>
 
     <main layout:fragment="content">
         <!-- 자식 페이지에서 여기에 내용 채움 -->

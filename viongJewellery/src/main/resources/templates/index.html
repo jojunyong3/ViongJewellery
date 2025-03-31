@@ -12,6 +12,10 @@
     <p>이 페이지는 레이아웃을 상속받고 본문만 채웁니다.</p>
 
 	
+	<button id="userBtn" class="border-red-300 border-3 m-5 p-5">유저버튼</button>
+	
+	
+	<p id="result"></p>
 
 	<div class="grid grid-cols-3 lg:grid-cols-5 gap-5 mx-3">
 		<div th:each="product : ${productList}">
@@ -31,7 +35,34 @@
 	</div>
 
 
-    관리자
+,
+	<script>
+		document.getElementById('userBtn').addEventListener('click', () => {
+
+
+			let promise =  fetch('/api/user')
+		
+			promise.then(respon => respon.json())
+			.then(data => {console.log(data);
+				document.getElementById('result').innerText = data.name;});
+			
+
+/*
+			.then((response) =>  {
+
+				console.log(response);
+				console.log(response.json());
+				
+
+				let p = document.getElementById('result');
+				p.innerText =response.json();
+			})
+*/
+
+
+		})
+
+	</script>
 	
 
 
