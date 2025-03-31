@@ -34,8 +34,25 @@ public class TestViewController {
 	{
 		return "test/paging";
 	}
-		
-		
+	
+	/*
+	 * 어드민 샘플 페이지
+	 */
+	@GetMapping("/test/infinitiscroll")
+	public String infinitiScrollView(Model model)
+	{
+		return "test/infinitiscroll";
+	}	
+	
+	
+	/*
+	 * 어드민 샘플 페이지
+	 */
+	@GetMapping("/test/admin")
+	public String adminView(Model model)
+	{
+		return "test/admin";
+	}	
 	
 	//view 즉 html반환만이 목적이다. 데이터는 ajax요청으로 비동기로 따로 가져간다.
 	@GetMapping("/test/ajaxtest")

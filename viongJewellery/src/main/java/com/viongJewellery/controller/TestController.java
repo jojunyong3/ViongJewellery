@@ -24,8 +24,8 @@ public class TestController {
 	public ProductEntity get()
 	{
 		ProductEntity product = new ProductEntity();
-		product.setPRODUCT_PRICE(1500);
-		product.setPRODUCT_NAME("황금반지");
+	
+		product.setNAME("황금반지");
 		
 		return product;
 	}
