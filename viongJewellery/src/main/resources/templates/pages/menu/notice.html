@@ -8,11 +8,10 @@
 </head>
 <body>
 <div layout:fragment="content">
-	
-
-    
+ 
     <div class="px-24">
         <h1>공지사항</h1>
+		
             <!--table-->
             <div class="flex flex-col">
                 <div class="-m-1.5 overflow-x-auto">
@@ -26,29 +25,41 @@
                             <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">날짜</th>
                         </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                        <tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">John Brown</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">45</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">New York No. 1 Lake Park</td>
-                         </tr>
-                         
-                        
-                        </tbody>
+                        <tbody id="noticeTableBody" class="divide-y divide-gray-200 dark:divide-neutral-700">
+							<!-- JS로 채워짐 -->
+						</tbody>
                     </table>
-                    </div>
+					</div>					
                 </div>
                 </div>
-            </div><!--table end-->
-
-
-
-
+            </div>
+			<!--table end-->
+			
+			<!-- 📄 페이지네이션 -->
+			 <div id="pagination" class="flex justify-center gap-2 pt-4">
+			 <!-- JS로 생성 -->
     </div>
 </div>
+	<script>
+	  async function loadPage() {
+	    const res = await fetch(`/api/v1/public/notice?id=${encodeURIComponent(id)}`);
+	    const data = await res.json();
+	    
+	    const noticeBody = document.getElementById('noticeTableBody');
+	    noticeBody.innerHTML = '';
+	  			
+	    data.entity.forEach(notice => {
+	      const row = `<tr>
+	          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">${notice.id}</td>
+	          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.title}</td>
+	          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.created_at}</td>
+	      </tr>`;
+	      noticeBody.insertAdjacentHTML('beforeend', row);
+	    });
+	  }
 	
-	
+	  loadPage();
+	</script>
 
-</div>
 </body>
 </html>

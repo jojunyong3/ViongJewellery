@@ -12,7 +12,6 @@ import com.viongJewellery.entity.ProductEntity;
 import com.viongJewellery.service.ProductService;
 
 @Controller
-@RequestMapping("/v1/public/view")
 public class ViewController {
 	
 	@Autowired
@@ -30,7 +29,7 @@ public class ViewController {
 	}
 	
 	
-	@GetMapping("/viongJewellery")
+	@GetMapping("/v1/public/view/viongJewellery")
 	public String testView(Model model) {
 		
 		
@@ -39,7 +38,7 @@ public class ViewController {
 		return "viongJewellery";
 	}
 	
-	@GetMapping("/notice")
+	@GetMapping("/v1/public/view/notice")
 	public String noticeView(Model model) {
 				
 			

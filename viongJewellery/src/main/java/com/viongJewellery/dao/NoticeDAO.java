@@ -3,8 +3,10 @@ package com.viongJewellery.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.viongJewellery.entity.NoticeEntity;
+import com.viongJewellery.entity.ProductEntity;
 
 
 
@@ -12,6 +14,7 @@ import com.viongJewellery.entity.NoticeEntity;
 @Mapper
 public interface NoticeDAO {
 	
-	public List<NoticeEntity> select();
+	List<NoticeEntity> select(@Param("id") String id);	
+	
 	
 }
