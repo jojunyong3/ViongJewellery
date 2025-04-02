@@ -5,7 +5,7 @@
 
 <mapper namespace="com.viongJewellery.dao.NoticeDAO">
 
-  <!-- 단건 조회 -->
+  <!-- 조회 -->
   <select id="select" resultType="com.viongJewellery.entity.NoticeEntity" >
     SELECT ID,
            TITLE,

@@ -36,27 +36,40 @@
 			<!--table end-->
 			
     </div>
-</div>
-	<script>
-	  async function loadPage() {
-	    const res = await fetch(`/api/v1/public/notice?id=${encodeURIComponent(id)}`);
-	    const data = await res.json();
-	    
-	    const noticeBody = document.getElementById('noticeTableBody');
-	    noticeBody.innerHTML = '';
-	  			
-	    data.list.forEach(notice => {
-	      const row = `<tr>
-	          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">${notice.id}</td>
-	          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.title}</td>
-	          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.created_at}</td>
-	      </tr>`;
-	      noticeBody.insertAdjacentHTML('beforeend', row);
-	    });
-	  }
 	
-	  loadPage();
-	</script>
+	<script>
+			
+	
+		  async function loadPage() {
+			
+			
+			const id = 1;
+			 
+			console.log(encodeURIComponent(id));
+		    const res = await fetch(`/api/v1/public/notice?id=${encodeURIComponent(id)}`);
+		    const data = await res.json();
+		    
+
+		    const noticeBody = document.getElementById('noticeTableBody');
+		    noticeBody.innerHTML = '';
+		  			
+		    data.forEach(notice => {
+		      const row = `<tr>
+		          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">${notice.id}</td>
+		          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.title}</td>
+		          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.created_at}</td>
+		      </tr>`;
+			  
+			  
+		      noticeBody.insertAdjacentHTML('beforeend', row);
+		    });
+		  }
+		
+		  loadPage();
+		</script>
+	
+</div> <!-- content end -->
+	
 
 </body>
 </html>
