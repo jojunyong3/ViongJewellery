@@ -1,27 +1,166 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>ajax 예제</title>
-	<meta charset="UTF-8">
-</head>	
+  <title>AJAX HTTP 메서드 전체 예제</title>
+  <meta charset="UTF-8">
+</head>
 <body>
-	<h1>AJAX 예제</h1>
-	<button id="loadBtn">메시지 가져오기</button>
-	<p id="result">여기에 결과가 표시됩니다.</p>
-  
-	<script>
-	  document.getElementById("loadBtn").addEventListener("click", () => {
-		fetch("/api/v1/public/ajaxtest")
-		  .then(response => response.json())
-		  .then(data => {
-			document.getElementById("result").innerText = JSON.stringify(data, null, 2); // 예쁘게 포맷
-		  })
-		  .catch(err => {
-			console.error("에러 발생:", err);
-		  });
+  <h1>AJAX 메서드별 요청</h1>
+
+  <!-- GET (LIST) -->
+  <button id="getListBtn">GET - 목록 가져오기</button>
+  <p id="getListResult">GET 목록 결과</p>
+
+  <!-- GET (SINGLE) -->
+  <button id="getOneBtn">GET - 단건 가져오기</button>
+  <p id="getOneResult">GET 단건 결과</p>
+
+  <!-- POST -->
+  <button id="postBtn">POST 요청</button>
+
+  <!-- PUT -->
+  <button id="putBtn">PUT 요청</button>
+ 
+
+  <!-- PATCH -->
+  <button id="patchBtn">PATCH 요청</button>
+
+
+  <!-- DELETE -->
+  <button id="deleteBtn">DELETE 요청</button>
+
+
+  <script>
+    const baseUrl = "/api/v1/public/ajaxtest";
+
+    // GET - 목록 쿼리파라미터 (List 조회와 단건 조회는 둘다 GET 을 사용하기에 url이 달라야 한다.)
+    document.getElementById("getListBtn").addEventListener("click", () => {
+      const params = new URLSearchParams({ name: "홍길동", passWord: "암호132" });
+      fetch(`${baseUrl}/list?${params.toString()}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("getListResult").innerText = JSON.stringify(data, null, 2);
+        });
+    });
+
+    // GET - 단건 패스파라미터
+    document.getElementById("getOneBtn").addEventListener("click", () => {
+      const id = "아이디132";
+      fetch(`${baseUrl}/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("getOneResult").innerText = JSON.stringify(data, null, 2);
+        });
+    });
+
+    // POST 바디파라미터
+	document.getElementById("postBtn").addEventListener("click", () => {
+	  const body = { name: "홍길동", passWord: "암호132" };
+
+	  fetch(baseUrl, {
+	    method: "POST",
+	    headers: { "Content-Type": "application/json" },
+	    body: JSON.stringify(body)
+	  })
+	  .then(async res => {
+	  	    if (res.status === 201) {
+	  	      alert("생성 성공 (201 Created)");
+	  	    } 
+	  		else if(res.status === 204){
+	  			alert("수정 성공 (204 NoContent)");
+	  		}
+	  		else if (res.status >= 400 && res.status < 500) {
+	  	      const errorMsg = await res.text();
+	  	      alert(`클라이언트 오류 (${res.status}): ${errorMsg}`);
+	  	    } else if (res.status >= 500) {
+	  	      alert(`서버 오류 (${res.status})`);
+	  	    } else {
+	  	      alert(`다른 응답 (${res.status})`);
+	  	    }
+	  	  });
+	});
+
+    // PUT PK를 패스 파라미터, 업데이트할 내용을 바디파라미터 섞어 쓴다.
+    document.getElementById("putBtn").addEventListener("click", () => {
+      const id = 123;
+      const body = { name: "홍길순", passWord: "암호132" };
+      fetch(`${baseUrl}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      })
+	  .then(async res => {
+	    if (res.status === 201) {
+	      alert("생성 성공 (201 Created)");
+	    } 
+		else if(res.status === 204)
+		{
+			alert("수정 성공 (204 NoContent)");
+		}
+		else if (res.status >= 400 && res.status < 500) {
+	      const errorMsg = await res.text();
+	      alert(`클라이언트 오류 (${res.status}): ${errorMsg}`);
+	    } else if (res.status >= 500) {
+	      alert(`서버 오류 (${res.status})`);
+	    } else {
+	      alert(`다른 응답 (${res.status})`);
+	    }
 	  });
-	</script>
-	
-	
+    });
+
+    // PATCH 바디파라미터
+    document.getElementById("patchBtn").addEventListener("click", () => {
+      const id = 123;
+      const body = { name: "홍길순", passWord: "암호132" };
+      fetch(`${baseUrl}/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      })
+	  .then(async res => {
+	  	    if (res.status === 201) {
+	  	      alert("생성 성공 (201 Created)");
+	  	    } 
+	  		else if(res.status === 204)
+	  		{
+	  			alert("수정 성공 (204 NoContent)");
+	  		}
+	  		else if (res.status >= 400 && res.status < 500) {
+	  	      const errorMsg = await res.text();
+	  	      alert(`클라이언트 오류 (${res.status}): ${errorMsg}`);
+	  	    } else if (res.status >= 500) {
+	  	      alert(`서버 오류 (${res.status})`);
+	  	    } else {
+	  	      alert(`다른 응답 (${res.status})`);
+	  	    }
+	  	  });
+    });
+
+    // DELETE 패스파라미터  삭제 사유 남기려면 패스파라미터 뒤에 쿼리파라미터로 사유를 전달하는 방식을 주로 쓴다.
+    document.getElementById("deleteBtn").addEventListener("click", () => {
+      const id = "아이디123";
+
+      fetch(`${baseUrl}/${id}`, {
+        method: "DELETE"
+      })
+	  .then(async res => {
+  	    if (res.status === 201) {
+  	      alert("생성 성공 (201 Created)");
+  	    } 
+  		else if(res.status === 204)
+  		{
+  			alert("삭제 성공 (204 NoContent)");
+  		}
+  		else if (res.status >= 400 && res.status < 500) {
+  	      const errorMsg = await res.text();
+  	      alert(`클라이언트 오류 (${res.status}): ${errorMsg}`);
+  	    } else if (res.status >= 500) {
+  	      alert(`서버 오류 (${res.status})`);
+  	    } else {
+  	      alert(`다른 응답 (${res.status})`);
+  	    }
+  	  });
+    });
+  </script>
 </body>
 </html>
