@@ -1,0 +1,112 @@
+<!-- templates/pages/home.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title layout:title="공지사항">공지사항</title>
+</head>
+<body>
+<div layout:fragment="content">
+ 
+    <div class="px-24">
+        <h1>공지사항</h1>
+		
+            <!--table-->
+            <div class="flex flex-col border border-gray-200 rounded-xl">
+                <div class="-m-1.5 overflow-x-auto">
+                <div class="p-1.5 min-w-full inline-block align-middle">
+                    <div class="overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">번호</th>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">제목</th>
+                            <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">날짜</th>
+                        </tr>
+                        </thead>
+                        <tbody id="noticeTableBody" class="divide-y divide-gray-200 dark:divide-neutral-700">
+							<!-- JS로 채워짐 -->
+						</tbody>
+                    </table>
+					</div>					
+                </div>
+                </div>
+            </div>
+			<!--table end-->
+			
+			<!-- 📄 페이지네이션 -->
+			    <div id="pagination" class="flex justify-center gap-2 pt-4">
+			      <!-- JS로 생성 -->
+			    </div>
+				
+				<div class="flex justify-end">
+					<button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 focus:outline-hidden focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
+					  <a href="/v1/public/view/notice/detail">등록</a>
+					</button>
+          
+				</div>
+    </div>
+	
+	<script>
+				
+		  async function loadPage(pageNum = 1) {
+						
+			const id = 1;
+			const size = 10;
+			 
+		    const res = await fetch(`/api/v1/public/notice/page?id=${encodeURIComponent(id)}&page=${pageNum}&size=${size}`);
+		    const data = await res.json();
+			
+		    const noticeBody = document.getElementById('noticeTableBody');
+		    noticeBody.innerHTML = '';
+		  			
+		    data.list.forEach(notice => {
+		      const row = `<tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
+		          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">${notice.id}</td>
+		          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.title}</td>
+		          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.created_at}</td>
+		      </tr>`;
+			  			  
+		      noticeBody.insertAdjacentHTML('beforeend', row);
+		    });
+			
+			
+			
+			const pagination = document.getElementById('pagination');
+	  	       pagination.innerHTML = '';
+
+	  	       const createBtn = (label, page, isActive = false) => `
+	  	         <button onclick="loadPage(${page})"
+	  	                 class="inline-flex items-center justify-center h-10 px-4 text-sm font-medium rounded-lg ${isActive
+	  	           ? 'bg-blue-600 text-white'
+	  	           : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-100 dark:bg-neutral-800 dark:border-neutral-600 dark:text-neutral-200 dark:hover:bg-neutral-700'}">
+	  	           ${label}
+	  	         </button>`;
+				 
+				 
+
+	  	       if (data.pageNum > 1) {
+	  	         pagination.insertAdjacentHTML('beforeend', createBtn('이전', data.pageNum - 1));
+	  	       }
+
+	  	       for (let i = 1; i <= data.pages; i++) {
+	  	         pagination.insertAdjacentHTML('beforeend', createBtn(i, i, i === data.pageNum));
+	  	       }
+
+	  	       if (data.pageNum < data.pages) {
+	  	         pagination.insertAdjacentHTML('beforeend', createBtn('다음', data.pageNum + 1));
+	  	       }
+			
+			
+		  }			   
+		  				
+		  loadPage();
+		</script>
+		
+		
+</div> <!-- content end -->
+	
+
+</body>
+</html>

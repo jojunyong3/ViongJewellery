@@ -1,5 +1,7 @@
 package com.viongJewellery.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +18,17 @@ public class ProductController {
 
 	
 	@Autowired
-	ProductService service;
+	ProductService service;	
 	
-	
+	@GetMapping("/")
+    public List<ProductEntity> getProducts(
+    		@RequestParam String name
+    ) {
+		List<ProductEntity> list = service.getList(name);
+		
+		return list;
+       
+    }
 	
 	
 	@GetMapping("/page")

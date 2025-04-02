@@ -42,6 +42,13 @@ public class ViewController {
 	public String noticeView(Model model) {
 				
 			
-		return "pages/menu/notice";
+		return "pages/menu/notice/notice";
+	}
+	
+	@GetMapping("/v1/public/view/notice/detail")
+	public String noticeDetailView(Model model) {
+				
+			
+		return "pages/menu/notice/noticeDetail";
 	}
 }

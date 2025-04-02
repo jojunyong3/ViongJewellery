@@ -23,10 +23,7 @@ public class ProductService {
 	{
 		//현재는 데이터 가공하는것 없이 그대로 컨트롤러로 전달
 		List<ProductEntity> list = dao.selectList(name);
-		
-		
-		
-		
+
 		return list;
 
 	}
