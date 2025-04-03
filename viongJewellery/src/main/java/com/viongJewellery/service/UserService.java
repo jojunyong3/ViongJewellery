@@ -22,7 +22,6 @@ public class UserService {
 		
 		User user = new User(entity);
 		
-		
 		return user;
 	}
 	

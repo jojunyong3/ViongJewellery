@@ -50,8 +50,7 @@ public class TestController {
 	
 	        return new User(id,"","");
 	    }
-	    
-	    
+	    	    
 	    /**
 	     * 
 	     * @param user  바디파라미터를 받을때는 변수 1개로만 받을수 있다. 따라서 일치하는 객체를 받도록 해야 된다. 

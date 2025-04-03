@@ -9,4 +9,5 @@ public class NoticeEntity {
 	private String TITLE;
 	private String CONTENT;
 	private String CREATED_AT;
+	
 }

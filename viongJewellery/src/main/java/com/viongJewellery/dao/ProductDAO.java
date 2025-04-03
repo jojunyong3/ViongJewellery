@@ -10,9 +10,7 @@ import com.viongJewellery.entity.ProductEntity;
 public interface ProductDAO {
 
     // 전체 목록 조회 (name 조건 optional)
-    List<ProductEntity> selectList(@Param("name") String name);
-
-    
+    List<ProductEntity> selectList(@Param("name") String name);    
     
     // 단건 조회
     ProductEntity selectOne(@Param("productNumber") String productNumber);
