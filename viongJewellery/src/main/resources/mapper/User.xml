@@ -13,9 +13,18 @@
            EMAIL,
            GRADE         
     FROM ADMIN
-    WHERE ID = #{name}
+    WHERE ID = #{id}
   </select>
 
- 
+
+   <select id="selectList" resultType="com.viongJewellery.entity.UserEntity" >
+    SELECT ID,
+           NAME,
+           PASSWORD,
+           EMAIL,
+           GRADE         
+    FROM ADMIN
+    WHERE NAME = #{name}
+  </select>
 
 </mapper>
