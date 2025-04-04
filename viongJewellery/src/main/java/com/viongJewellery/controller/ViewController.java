@@ -51,4 +51,11 @@ public class ViewController {
 			
 		return "pages/menu/notice/noticeDetail";
 	}
+	
+	@GetMapping("/v1/admin")
+	public String adminView(Model model) {
+				
+			
+		return "pages/admin/index";
+	}
 }
