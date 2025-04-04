@@ -19,10 +19,16 @@ import com.viongJewellery.service.NoticeService;
 @RestController
 @RequestMapping("/api/v1/public/notice")
 public class NoticeController {
+
+    private final TestController testController;
 	
 	
 	@Autowired
 	NoticeService noticeService;
+
+    NoticeController(TestController testController) {
+        this.testController = testController;
+    }
 	
 	@GetMapping("/")
 	public List<NoticeEntity>  getNoticeList( 
@@ -54,10 +60,10 @@ public class NoticeController {
 	    }
 	
 	@PostMapping("/")
-	public String putNotice( 
-			@RequestBody String title,
-			@RequestBody String content
-	) {		
+	public String putNotice(@RequestBody Notice notice) {		
+		
+		System.out.println(notice.getTitle());
+		System.out.println(notice.getContent());
 		
 		return "test";
 	}

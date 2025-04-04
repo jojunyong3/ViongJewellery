@@ -11,17 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Notice {
 
-	private String ID;
-	private String TITLE;
-	private String CONTENT;
-	private String CREATED_AT;
+	private String id;
+	private String title;
+	private String content;
+	private String createdAt;
 	
 	public Notice(NoticeEntity entity)
 	{
-		this.ID = entity.getID();
-		this.TITLE = entity.getTITLE();
-		this.CONTENT = entity.getCONTENT();
-		this.CREATED_AT = entity.getCREATED_AT();
+		this.id = entity.getID();
+		this.title = entity.getTITLE();
+		this.content = entity.getCONTENT();
+		this.createdAt = entity.getCREATED_AT();
 	}
 	
 	

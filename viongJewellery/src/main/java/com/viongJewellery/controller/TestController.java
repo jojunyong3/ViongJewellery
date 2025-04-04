@@ -26,7 +26,7 @@ import com.viongJewellery.dto.User;
 @RequestMapping("/api/v1/public/ajaxtest")
 public class TestController {
 
-	
+		
 
     	/**
     	 * 리스트를 조회 한다. 쿼리파라미터 수신
