@@ -14,7 +14,8 @@ import com.viongJewellery.entity.ProductEntity;
 @Mapper
 public interface NoticeDAO {
 	
-	List<NoticeEntity> select(@Param("id") String id);	
+	List<NoticeEntity> select(String id);	
+	
 	
 	
 }

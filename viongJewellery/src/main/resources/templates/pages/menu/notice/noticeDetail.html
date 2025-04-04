@@ -29,7 +29,7 @@
 			<button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 focus:outline-hidden focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
               <a href="/v1/public/view/notice"> 이전 </a>
              </button>
-            <button onclick="saveBtn()" type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 focus:outline-hidden focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
+            <button id="saveBtn" type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 text-gray-500 hover:border-blue-600 hover:text-blue-600 focus:outline-hidden focus:border-blue-600 focus:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500 dark:hover:border-blue-600 dark:focus:text-blue-500 dark:focus:border-blue-600">
               저장
             </button>
   
@@ -38,12 +38,15 @@
 		
 
     <script>
-		const baseUrl = "/api/v1/public/notice";
+		const baseUrl = "/api/v1/public/notice";		
 		
 		const saveBtn = () => {
+			
 		    const title = document.getElementById("title").value;
 		    const content = document.getElementById("content").value;
-
+			
+			consol.log(title);
+			
 		    // POST 요청으로 공지 저장
 		    fetch(baseUrl, {
 		        method: "POST",
@@ -68,7 +71,7 @@
 		    });
 		};
 		  
-
+		document.getElementById("saveBtn").addEventListener("click", saveBtn);
 
 
     </script>
