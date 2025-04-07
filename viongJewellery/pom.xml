@@ -85,6 +85,12 @@
 		    <artifactId>pagehelper-spring-boot-starter</artifactId>
 		    <version>1.4.7</version>
 		</dependency>
+		<dependency><!--2025.04.07 스웨거 적용 박주병-->
+	      <groupId>org.springdoc</groupId>
+	      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	      <version>2.6.0</version>
+	    </dependency>
+		
 	</dependencies>
 
 	<build>

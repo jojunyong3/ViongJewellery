@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.viongJewellery.domain.metal.MetalPriceDAO">
+
+    <select id="selectById" resultType="com.viongJewellery.domain.metal.MetalPriceEntity">
+        SELECT 
+            ID,
+            METAL_TYPE,
+            PRICE_DATE,
+            OFFICIAL_PRICE,
+            BUY_PRICE,
+            SELL_PRICE,
+            UNIT,
+            CREATED_AT,
+            UPDATED_AT
+        FROM METAL_PRICES
+        WHERE ID = #{ID}
+    </select>
+
+    <select id="selectAll" resultType="com.viongJewellery.domain.metal.MetalPriceEntity">
+        SELECT 
+            ID,
+            METAL_TYPE,
+            PRICE_DATE,
+            OFFICIAL_PRICE,
+            BUY_PRICE,
+            SELL_PRICE,
+            UNIT,
+            CREATED_AT,
+            UPDATED_AT
+        FROM METAL_PRICES
+        ORDER BY PRICE_DATE DESC, METAL_TYPE
+    </select>
+
+    <select id="selectByDateAndType" resultType="com.viongJewellery.domain.metal.MetalPriceEntity">
+        SELECT 
+            ID,
+            METAL_TYPE,
+            PRICE_DATE,
+            OFFICIAL_PRICE,
+            BUY_PRICE,
+            SELL_PRICE,
+            UNIT,
+            CREATED_AT,
+            UPDATED_AT
+        FROM METAL_PRICES
+        WHERE PRICE_DATE = #{priceDate}
+        <if test="metalType != null">
+            AND METAL_TYPE = #{metalType}
+        </if>
+    </select>
+	
+	<select id="selectByDate" resultType="com.viongJewellery.domain.metal.MetalPriceEntity">
+	    SELECT ID,
+            METAL_TYPE,
+            PRICE_DATE,
+            OFFICIAL_PRICE,
+            BUY_PRICE,
+            SELL_PRICE,
+            UNIT,
+            CREATED_AT,
+            UPDATED_AT 
+            FROM METAL_PRICES WHERE PRICE_DATE = #{priceDate}
+	</select>
+
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="ID">
+        INSERT INTO METAL_PRICES (
+            METAL_TYPE,
+            PRICE_DATE,
+            OFFICIAL_PRICE,
+            BUY_PRICE,
+            SELL_PRICE,
+            UNIT
+        ) VALUES (
+            #{METAL_TYPE},
+            #{PRICE_DATE},
+            #{OFFICIAL_PRICE},
+            #{BUY_PRICE},
+            #{SELL_PRICE},
+            #{UNIT}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE METAL_PRICES
+        SET
+            METAL_TYPE = #{METAL_TYPE},
+            PRICE_DATE = #{PRICE_DATE},
+            OFFICIAL_PRICE = #{OFFICIAL_PRICE},
+            BUY_PRICE = #{BUY_PRICE},
+            SELL_PRICE = #{SELL_PRICE},
+            UNIT = #{UNIT}
+        WHERE ID = #{ID}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM METAL_PRICES WHERE ID = #{ID}
+    </delete>
+
+</mapper>

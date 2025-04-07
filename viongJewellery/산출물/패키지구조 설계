@@ -1,0 +1,35 @@
+쿠팡,카카오,배민 및 기타 오픈소스 프로젝트들의 일반적인 패키지 형태를 채택
+
+
+
+com.viongJewellery
+├── api                          ← 외부 요청 진입점 (HTML or JSON 구분 없이 모두)
+│   ├── admin                    ← 관리자 영역
+│   │   ├── controller           ← HTML 페이지 컨트롤러 (@Controller)
+│   │   ├── rest                 ← JSON API 전용 컨트롤러 (@RestController)
+│   │   └── dto
+│   │       ├── request          ← 클라이언트에서 받는 데이터 (POST 등)
+│   │       ├── response         ← 클라이언트로 보내는 데이터 (JSON or ViewModel)
+│   │       └── view             ← HTML 렌더링용 DTO
+│   │
+│   └── user                     ← 사용자 영역
+│       ├── controller
+│       ├── rest
+│       └── dto
+│           ├── request
+│           ├── response
+│           └── view
+│
+├── domain                       ← 핵심 도메인 계층
+│   └── metal
+│       ├── entity               ← DB 매핑 클래스 (JPA or MyBatis)
+│       ├── dto                  ← 비즈니스 로직 중심 DTO (서비스 전용)
+│       ├── service              ← 핵심 서비스 계층
+│       ├── repository           ← DAO, Mapper 계층
+│       └── mapper               ← MapStruct 또는 직접 작성한 변환기 (DTO ↔ Entity)
+│
+├── config                       ← Spring 설정 (WebConfig, SecurityConfig, Swagger 등)
+├── exception                    ← 글로벌 예외 핸들링, 커스텀 예외 클래스
+├── util                         ← 날짜, 숫자, 문자열 등 공통 유틸
+├── constants                    ← 상수 정의 (Enum, 코드, 금속 종류 등)
+└── support                      ← 인터셉터, 필터, ArgumentResolver 등 기타 공통 기술

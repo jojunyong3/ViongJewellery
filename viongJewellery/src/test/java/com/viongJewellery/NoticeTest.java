@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.pagehelper.PageInfo;
 import com.mysql.cj.protocol.x.Notice;
-import com.viongJewellery.entity.NoticeEntity;
-import com.viongJewellery.service.NoticeService;
+import com.viongJewellery.domain.notice.NoticeEntity;
+import com.viongJewellery.domain.notice.NoticeService;
 
 @SpringBootTest
 public class NoticeTest {

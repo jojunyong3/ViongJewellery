@@ -39,13 +39,11 @@
 
     <script>
 		const baseUrl = "/api/v1/public/notice";		
-		
+		console.log("스크립트");
 		const saveBtn = () => {
 			
 		    const title = document.getElementById("title").value;
 		    const content = document.getElementById("content").value;
-			
-			consol.log(title);
 			
 		    // POST 요청으로 공지 저장
 		    fetch(baseUrl, {

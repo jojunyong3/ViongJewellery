@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.viongJewellery.dao.UserDAO;
-import com.viongJewellery.dto.User;
-import com.viongJewellery.service.UserService;
+import com.viongJewellery.domain.user.UserDAO;
+import com.viongJewellery.domain.user.UserService;
+import com.viongJewellery.domain.user.dto.User;
 
 @SpringBootTest
 public class UserTest {

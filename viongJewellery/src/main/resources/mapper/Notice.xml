@@ -3,10 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.viongJewellery.dao.NoticeDAO">
+<mapper namespace="com.viongJewellery.domain.notice.NoticeDAO">
 
   <!-- 조회 -->
-  <select id="select" resultType="com.viongJewellery.entity.NoticeEntity" >
+  <select id="select" resultType="com.viongJewellery.domain.notice.NoticeEntity" >
     SELECT ID,
            TITLE,
            CONTENT,

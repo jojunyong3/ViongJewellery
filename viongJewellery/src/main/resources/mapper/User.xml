@@ -3,10 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.viongJewellery.dao.UserDAO">
+<mapper namespace="com.viongJewellery.domain.user.UserDAO">
 
   <!-- 단건 조회 -->
-  <select id="select" resultType="com.viongJewellery.entity.UserEntity" >
+  <select id="select" resultType="com.viongJewellery.domain.user.UserEntity" >
     SELECT ID,
            NAME,
            PASSWORD,
@@ -17,7 +17,7 @@
   </select>
 
 
-   <select id="selectList" resultType="com.viongJewellery.entity.UserEntity" >
+   <select id="selectList" resultType="com.viongJewellery.domain.user.UserEntity" >
     SELECT ID,
            NAME,
            PASSWORD,
