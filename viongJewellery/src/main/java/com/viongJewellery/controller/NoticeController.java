@@ -59,7 +59,7 @@ public class NoticeController {
 	        return new Notice("","","",title);
 	    }
 	
-	@PostMapping("/")
+	@PostMapping()
 	public String putNotice(@RequestBody Notice notice) {		
 		
 		System.out.println(notice.getTitle());
