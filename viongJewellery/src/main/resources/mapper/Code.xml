@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.viongJewellery.domain.code.CodeDAO">
+
+    <select id="selectAll" >
+        SELECT 
+            CODE, CODE_NAME, UP_CODE, SORT, ETC01, ETC02, USE_YN
+        FROM CODE
+    </select>
+
+    <select id="selectByCode"  parameterType="String">
+        SELECT 
+            CODE, CODE_NAME, UP_CODE, SORT, ETC01, ETC02, USE_YN
+        FROM CODE
+        WHERE CODE = #{code}
+    </select>
+
+    <select id="selectByUpCode"  parameterType="String">
+        SELECT 
+            CODE, CODE_NAME, UP_CODE, SORT, ETC01, ETC02, USE_YN
+        FROM CODE
+        WHERE UP_CODE = #{upCode}
+    </select>
+
+    <insert id="insert" >
+        INSERT INTO CODE (
+            CODE, CODE_NAME, UP_CODE, SORT, ETC01, ETC02, USE_YN
+        ) VALUES (
+            #{CODE}, #{CODE_NAME}, #{UP_CODE}, #{SORT}, #{ETC01}, #{ETC02}, #{USE_YN}
+        )
+    </insert>
+
+    <update id="update" >
+        UPDATE CODE
+        SET
+            CODE_NAME = #{CODE_NAME},
+            UP_CODE = #{UP_CODE},
+            SORT = #{SORT},
+            ETC01 = #{ETC01},
+            ETC02 = #{ETC02},
+            USE_YN = #{USE_YN}
+        WHERE CODE = #{CODE}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE FROM CODE WHERE CODE = #{code}
+    </delete>
+
+</mapper>
