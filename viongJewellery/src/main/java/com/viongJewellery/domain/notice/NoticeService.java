@@ -1,5 +1,7 @@
 package com.viongJewellery.domain.notice;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,7 @@ import com.viongJewellery.domain.notice.dto.Notice;
 public class NoticeService {
 	
 	@Autowired
-	NoticeDAO dao;
-	
+	NoticeDAO dao;	
 	
 	public List<NoticeEntity>  getNotice(String id)
 	{
@@ -32,5 +33,16 @@ public class NoticeService {
 
 		return new PageInfo<>(entity);
 	}
+	
+	public void insert(Notice notice) {
+	
+		NoticeEntity entity = new NoticeEntity();
+		
+		entity.setTITLE(notice.getTitle());
+		entity.setCONTENT(notice.getContent());				
+		
+		dao.insert(entity);
+		
+		}
 
 }

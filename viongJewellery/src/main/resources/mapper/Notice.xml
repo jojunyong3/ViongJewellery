@@ -14,5 +14,9 @@
     FROM NOTICE
   </select>
   
+  <insert id="insert">
+    INSERT INTO NOTICE (CONTENT, TITLE)
+    VALUES (#{CONTENT}, #{TITLE})
+  </insert>
 
 </mapper>

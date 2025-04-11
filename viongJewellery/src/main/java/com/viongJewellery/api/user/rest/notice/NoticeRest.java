@@ -17,7 +17,7 @@ import com.viongJewellery.domain.notice.NoticeService;
 import com.viongJewellery.domain.notice.dto.Notice;
 
 @RestController
-@RequestMapping("api/v1/public/notice")
+@RequestMapping("/api/v1/public/notice")
 public class NoticeRest {
 
 	@Autowired
@@ -56,10 +56,7 @@ public class NoticeRest {
 	@PostMapping()
 	public String putNotice(@RequestBody Notice notice) {		
 		
-			
-		System.out.println(notice.getTitle());
-		System.out.println(notice.getContent());
-		
+		noticeService.insert(notice);
 		
 		return "완료";
 	}

@@ -24,5 +24,8 @@ public class Notice {
 		this.createdAt = entity.getCREATED_AT();
 	}
 	
-	
+	public void NoticeEntity(NoticeEntity entity) {
+		entity.setTITLE(title);
+		entity.setCONTENT(content);
+	}
 }
