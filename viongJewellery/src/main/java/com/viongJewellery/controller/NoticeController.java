@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
-import com.viongJewellery.dto.Notice;
-import com.viongJewellery.entity.NoticeEntity;
-import com.viongJewellery.service.NoticeService;
+import com.viongJewellery.api.admin.controller.test.TestController;
+import com.viongJewellery.domain.notice.NoticeEntity;
+import com.viongJewellery.domain.notice.NoticeService;
 
 @RestController
 @RequestMapping("/api/v1/public/notice")
