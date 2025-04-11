@@ -6,7 +6,12 @@ const sidebarMenu = [
   {
     label: '대시보드',
     icon: '🏠',
-    link: '/admin/dashboard'
+    link: '/v1/admin'
+  },
+  {
+    label: '시세 관리',
+    icon: '📊',
+    link: '/v1/admin/metal-prices'
   },
   {
     label: '사용자 관리',
