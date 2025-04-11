@@ -13,7 +13,6 @@
            CREATED_AT     
     FROM NOTICE
   </select>
-
- 
+  
 
 </mapper>

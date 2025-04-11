@@ -7,12 +7,16 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.viongJewellery.domain.code.CodeDAO;
-import com.viongJewellery.domain.code.CodeEntity;
 import com.viongJewellery.domain.metal.dto.AdminDashBoardView;
 import com.viongJewellery.domain.metal.dto.MetalPrice;
 import com.viongJewellery.domain.metal.dto.PriceChangeResult;
+import com.viongJewellery.support.CodeCache;
+import com.viongJewellery.util.PageHelperUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,19 +24,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MetalPriceService {
 
-	@Autowired
+	
     private final MetalPriceDAO metalPriceDao;
     
+	private final CodeCache codeCache;
 	
-	@Autowired
-	private final CodeDAO codeDao;
-    
+	
+	
     public MetalPrice getById(Long ID) {
+    	
+    	
         MetalPriceEntity result = metalPriceDao.selectById(ID);
         if (result == null) {
             throw new RuntimeException("해당 ID의 금속 시세 정보가 존재하지 않습니다: " + ID);
         }
         return new MetalPrice(result);
+        
+        
     }
     
     
@@ -51,19 +59,15 @@ public class MetalPriceService {
     	List<MetalPrice> todayList = metalPriceDao.selectByDate(LocalDate.now())
     								 .stream().map(MetalPrice::new).toList();
     	
-    	// 1. 금속 코드명 전체를 Map으로 미리 조회
-    	Map<String, String> metalNameMap = codeDao.selectByUpCode("MT001").stream()
-    	    .collect(Collectors.toMap(CodeEntity::getCODE, CodeEntity::getCODE_NAME));
 
- 
     	
-    	// 2. 어제 시세도 한 번에 조회해서 Map 으로
+    	// 1. 어제 시세도 한 번에 조회해서 Map 으로
     	Map<String, MetalPrice> yesterdayPriceMap = metalPriceDao.selectByDate(LocalDate.now().minusDays(1))
     			.stream()
-	    	    .map(MetalPrice::new)
+	    	    .map(entity -> MetalPrice.from(entity, codeCache))
 	    	    .collect(Collectors.toMap(MetalPrice::getMetalType, mp -> mp));
 
-    	// 3. 오늘 가격 리스트 기준으로 비교 및 뷰 구성
+    	// 2. 오늘 가격 리스트 기준으로 비교 및 뷰 구성
     	return todayList.stream().map(todayPrice -> {
     	    String metalType = todayPrice.getMetalType();
     	    MetalPrice yesterdayPrice = yesterdayPriceMap.get(metalType);
@@ -73,7 +77,7 @@ public class MetalPriceService {
 
     	    return new AdminDashBoardView(
     	        metalType,
-    	        metalNameMap.getOrDefault(metalType, "알 수 없음"), // 한글 이름
+    	        todayPrice.getMetalName(),
     	        yesterdayPrice.getOfficialPrice(),
     	        todayPrice.getOfficialPrice(),
     	        result.getChangeAmount(),
@@ -91,7 +95,15 @@ public class MetalPriceService {
                 .map(MetalPrice::new)
                 .collect(Collectors.toList());
     }
-
+    
+    public PageInfo<MetalPrice> getAllPaged(int page,int size) {
+    	
+    	PageHelper.startPage(page, size);
+    	List<MetalPriceEntity> list = metalPriceDao.selectAll();
+    	PageInfo<MetalPriceEntity> entityPage = new PageInfo<>(list);
+    	return PageHelperUtils.convertPage(entityPage, entity -> MetalPrice.from(entity, codeCache));
+        
+    }
     
     /**
      * 
@@ -109,11 +121,14 @@ public class MetalPriceService {
     
 
     public void create(MetalPrice metalPrice) {
+
+    	
         MetalPriceEntity entity = metalPrice.toEntity();
         int inserted = metalPriceDao.insert(entity);
         if (inserted != 1) {
             throw new RuntimeException("금속 시세 등록 실패");
         }
+        
     }
 
     public void update(MetalPrice metalPrice) {

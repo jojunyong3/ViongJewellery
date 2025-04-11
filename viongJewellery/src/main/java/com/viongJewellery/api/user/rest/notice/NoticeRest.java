@@ -56,9 +56,11 @@ public class NoticeRest {
 	@PostMapping()
 	public String putNotice(@RequestBody Notice notice) {		
 		
+			
 		System.out.println(notice.getTitle());
 		System.out.println(notice.getContent());
 		
-		return "test";
+		
+		return "완료";
 	}
 }

@@ -1,0 +1,47 @@
+<!-- templates/pages/home.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{pages/admin/layout}">
+<head>
+    <title layout:title="시세관리">시세관리</title>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+</head>
+<body>
+<div layout:fragment="content" class="p-4">
+     
+<div class="w-full lg:ps-64">
+  <div class="p-4 sm:p-6 space-y-4 sm:space-y-6"> 
+
+    <h2 class="text-xl font-bold mb-4">시세 관리</h2>
+
+    <!-- card-->
+    <div class="flex flex-col row-span-2 col-span-2 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+    <div class="p-4 md:p-5">
+
+
+        <div id="paged-table"
+        hx-get="/v1/admin/metal-prices/fragment?page=1"
+        hx-trigger="load"
+        hx-target="this"
+        hx-swap="innerHTML">
+
+
+
+        </div>
+
+
+ 
+
+
+
+       
+    </div>
+    </div><!--card end-->
+
+</div>
+</div>
+
+</div>
+</body>
+</html>

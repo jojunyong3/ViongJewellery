@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import com.viongJewellery.domain.metal.MetalPriceEntity;
+import com.viongJewellery.support.CodeCache;
 
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class MetalPrice {
 
     private Long id;
     private String metalType;
+    private String metalName;
     private LocalDate priceDate;
     private BigDecimal officialPrice;
     private BigDecimal buyPrice;
@@ -48,6 +50,14 @@ public class MetalPrice {
         entity.setCREATED_AT(this.createdAt);     // 선택사항
         entity.setUPDATED_AT(this.updatedAt);     // 선택사항
         return entity;
+    }
+    
+    
+    //  metalName 까지 설정하는 팩토리 메서드
+    public static MetalPrice from(MetalPriceEntity entity, CodeCache codeCache) {
+        MetalPrice dto = new MetalPrice(entity);
+        dto.metalName = codeCache.getCodeName("MT001", dto.getMetalType());
+        return dto;
     }
     
     

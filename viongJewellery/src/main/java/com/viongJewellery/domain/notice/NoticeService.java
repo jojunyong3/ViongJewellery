@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.viongJewellery.domain.notice.dto.Notice;
 
 @Service 
 public class NoticeService {
 	
 	@Autowired
 	NoticeDAO dao;
+	
 	
 	public List<NoticeEntity>  getNotice(String id)
 	{
@@ -30,4 +32,5 @@ public class NoticeService {
 
 		return new PageInfo<>(entity);
 	}
+
 }
