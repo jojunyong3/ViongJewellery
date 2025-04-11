@@ -15,6 +15,6 @@ public interface NoticeDAO {
 	
 	List<NoticeEntity> select(String id);	
 	
-	
+	void insert(NoticeEntity notice);
 
 }
