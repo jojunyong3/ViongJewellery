@@ -3,6 +3,9 @@ package com.viongJewellery.api.user.rest.notice;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,17 +50,26 @@ public class NoticeRest {
 		return list;
 	}
 	
-	 @GetMapping("/{title}")
-	    public Notice get(@PathVariable String title) {
-	
-	        return new Notice("","","",title);
-	    }
 	
 	@PostMapping()
-	public String putNotice(@RequestBody Notice notice) {		
+	public ResponseEntity<Void> putNotice(@RequestBody Notice notice) {		
 		
 		noticeService.insert(notice);
 		
-		return "완료";
+		return ResponseEntity.status(HttpStatus.CREATED).build();  // 성공시 201 상태 코드 반환
+	}
+	
+	@GetMapping("/{id}")
+    public ResponseEntity<NoticeEntity> getNoticeById(@PathVariable("id") String id) {
+		
+        NoticeEntity notice = noticeService.getNoticeById(id);
+        
+        return ResponseEntity.ok(notice);
+    }
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteNotice(@PathVariable("id") String id) {
+	    noticeService.deleteNotice(id);
+	    return ResponseEntity.noContent().build();  // 204 No Content
 	}
 }

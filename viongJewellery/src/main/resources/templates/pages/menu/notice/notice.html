@@ -63,11 +63,12 @@
 		    noticeBody.innerHTML = '';
 		  			
 		    data.list.forEach(notice => {
-		      const row = `<tr class="hover:bg-gray-100 dark:hover:bg-neutral-700">
-		          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">${notice.id}</td>
-		          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.title}</td>
-		          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.created_at}</td>
-		      </tr>`;
+		      const row = `<tr onclick="window.location.href='/v1/public/notice/detail?id=${notice.id}'"
+				    class="cursor-pointer hover:bg-gray-100 dark:hover:bg-neutral-700">
+				    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">${notice.id}</td>
+				    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.title}</td>
+				    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">${notice.created_at}</td>
+				</tr>`;
 			  			  
 		      noticeBody.insertAdjacentHTML('beforeend', row);
 		    });

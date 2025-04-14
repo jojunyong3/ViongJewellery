@@ -1,7 +1,5 @@
 package com.viongJewellery.domain.notice;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +42,14 @@ public class NoticeService {
 		dao.insert(entity);
 		
 		}
-
+	
+	public NoticeEntity getNoticeById(String id) {		
+		
+	    return dao.find(id);	           
+	}
+	
+	public void deleteNotice(String id) {
+		
+        dao.delete(id);
+    }
 }
