@@ -18,5 +18,18 @@
     INSERT INTO NOTICE (CONTENT, TITLE)
     VALUES (#{CONTENT}, #{TITLE})
   </insert>
+  
+   <select id="find" parameterType="string" resultType="com.viongJewellery.domain.notice.NoticeEntity">
+        SELECT ID,
+           TITLE,
+           CONTENT,
+           CREATED_AT     
+   		 FROM NOTICE
+        WHERE ID = #{id}
+    </select>
+    
+    <delete id="delete" parameterType="string">
+    DELETE FROM NOTICE WHERE ID = #{id}
+  </delete>
 
 </mapper>
