@@ -1,0 +1,93 @@
+<!-- templates/pages/home.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{pages/admin/layout}">
+<head>
+    <title layout:title="시세관리">시세관리</title>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+</head>
+<body>
+<div layout:fragment="content" class="p-4">
+
+
+<div class="w-full lg:ps-64">
+<div class="p-4 sm:p-6 space-y-4 sm:space-y-6"> 
+
+    <h2 class="text-xl font-bold mb-4">시세 상세정보</h2>
+
+
+    <!-- card-->
+    <div class="flex flex-col row-span-2 col-span-2 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+    <div class="p-4 md:p-5">
+
+        <div class="max-w-sm">
+            <label for="id"  class="block text-sm font-medium mb-2 dark:text-white">ID</label>
+            <input type="text" id="id" disabled=""        
+                    th:value="${metalPrice == null ? '': metalPrice.id}"
+                    th:placeholder="${metalPrice == null ? '자동생성' : ''}" 
+                    class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+        </div>
+
+        <div class="max-w-sm">
+            <label for="metalType" class="block text-sm font-medium mb-2 dark:text-white">금속 종류</label>
+            <select id="metalType" class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                <th:block th:each="metalType : ${metalTypeList}">
+                <option>[[${metalType.codeName}]]</option>
+                </th:block>
+            </select>
+        </div>
+        <div class="max-w-sm">
+            <label for="metalType" class="block text-sm font-medium mb-2 dark:text-white">적용날짜</label>
+           
+            <input class="hs-datepicker py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-600 focus:ring-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:border-blue-500 dark:focus:ring-neutral-500" type="text" placeholder="Select day" readonly="" data-hs-datepicker='{
+                "type": "default",
+                "dateMax": "2050-12-31",
+                "mode": "custom-select",
+                "templates": {
+                  "arrowPrev": "<button data-vc-arrow=\"prev\"><svg class=\"shrink-0 size-4\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m15 18-6-6 6-6\"></path></svg></button>",
+                  "arrowNext": "<button data-vc-arrow=\"next\"><svg class=\"shrink-0 size-4\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m9 18 6-6-6-6\"></path></svg></button>"
+                }
+              }'>
+        </div>
+
+
+    </div>
+    </div>
+
+
+
+</div>
+</div>
+
+
+
+
+<script>
+    
+    function initDatepicker() {
+        
+      const el = document.querySelector('#datepicker');
+      console.log(el);
+      if (!el) return;
+  
+      if (!el.dataset.datepickerInitialized) {
+        const calendar = new VanillaCalendar(el, {
+          settings: {
+            selection: { day: 'single' },
+            visibility: { weekend: true },
+          }
+        });
+        calendar.init();
+        el.dataset.datepickerInitialized = 'true'; // 중복 방지
+      }
+    }
+    
+    
+    document.addEventListener('DOMContentLoaded', initDatepicker);
+    document.body.addEventListener('htmx:afterSwap', initDatepicker); // HTMX 교체 후에도 재적용
+  </script>
+  
+</div><!-- content end-->
+</body>
+</html>

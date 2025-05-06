@@ -32,7 +32,10 @@ public class NoticeController {
 	
 	@GetMapping("/detail")
 	public String noticeDetailView(Model model) {
-				
+		//아이디에 해당하는 게시글 정보 서비스를 통해서 가져온다.
+		
+		//가지고온 게시글 정보를 프론트엔드로 돌려준다.
+		
 			
 		return "pages/menu/notice/noticeDetail";
 	}

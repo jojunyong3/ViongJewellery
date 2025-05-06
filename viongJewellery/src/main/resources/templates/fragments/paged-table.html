@@ -1,0 +1,54 @@
+<!-- templates/fragments/paged-table.html -->
+<th:block th:fragment="paged-table(columns, rows, pageInfo, url)">
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+      <thead class="bg-gray-50 dark:bg-neutral-700">
+        <tr>
+          <th th:each="col : ${columns}"
+              th:text="${col.label}"
+              class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500"></th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
+        <tr th:each="row : ${rows}" class="hover:bg-gray-100 dark:hover:bg-neutral-700">
+          <td th:each="col : ${columns}"
+              th:text="${@beanUtil.getValue(row, col.field)}"
+              class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 페이지네이션 -->
+  <div class="py-4 flex justify-center">
+    <nav class="flex items-center space-x-1" aria-label="Pagination">
+      <button th:if="${pageInfo.pageNum > 1}"
+              th:attr="hx-get=${url} + '?page=' + (${pageInfo.pageNum - 1})"
+              hx-target="#paged-table"
+              hx-swap="innerHTML"
+              type="button"
+              class="p-2.5 min-w-10 inline-flex justify-center items-center text-sm rounded-full text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-neutral-700">
+        «
+      </button>
+
+      <button th:each="i : ${#numbers.sequence(1, pageInfo.pages)}"
+              th:classappend="${i == pageInfo.pageNum} ? 'bg-gray-200 dark:bg-neutral-600' : ''"
+              th:attr="hx-get=${url} + '?page=' + ${i}"
+              hx-target="#paged-table"
+              hx-swap="innerHTML"
+              type="button"
+              class="min-w-10 flex justify-center items-center py-2.5 text-sm rounded-full text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-neutral-700">
+        <span th:text="${i}">1</span>
+      </button>
+
+      <button th:if="${pageInfo.pageNum < pageInfo.pages}"
+              th:attr="hx-get=${url} + '?page=' + (${pageInfo.pageNum + 1})"
+              hx-target="#paged-table"
+              hx-swap="innerHTML"
+              type="button"
+              class="p-2.5 min-w-10 inline-flex justify-center items-center text-sm rounded-full text-gray-800 hover:bg-gray-100 dark:text-white dark:hover:bg-neutral-700">
+        »
+      </button>
+    </nav>
+  </div>
+</th:block>

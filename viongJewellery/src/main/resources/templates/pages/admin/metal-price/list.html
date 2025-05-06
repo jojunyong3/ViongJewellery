@@ -19,23 +19,21 @@
     <div class="flex flex-col row-span-2 col-span-2 bg-white border border-gray-200 shadow-2xs rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
     <div class="p-4 md:p-5">
 
-
+        <!--데이터 테이블 프래그먼트-->
         <div id="paged-table"
         hx-get="/v1/admin/metal-prices/fragment?page=1"
         hx-trigger="load"
         hx-target="this"
         hx-swap="innerHTML">
-
-
-
+        </div>
+       
+        <div class="flex w-full justify-end">
+            <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                <a href="/v1/admin/metal-prices/create" class="block w-full h-full">추가</a>
+      
+            </button>
         </div>
 
-
- 
-
-
-
-       
     </div>
     </div><!--card end-->
 
